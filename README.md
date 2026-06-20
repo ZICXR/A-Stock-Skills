@@ -1,10 +1,10 @@
 # 📈 A-Stock-Skills
 
-> 🇨🇳 专业级 A 股分析 Claude Agent Skills 库 | 29 个即插即用 Skills 覆盖数据采集 / 大盘分析 / 资金流向 / 涨停追踪 / 个股研究 / 量化策略 / 智能报告
+> 🇨🇳 专业级 A 股分析 Claude Agent Skills 库 | 33 个即插即用 Skills 覆盖数据采集 / 大盘分析 / 资金流向 / 涨停追踪 / 个股研究 / 量化策略 / 智能报告
 
 [![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-29-orange.svg)](#-技能目录)
+[![Skills](https://img.shields.io/badge/skills-33-orange.svg)](#-技能目录)
 [![GitHub stars](https://img.shields.io/github/stars/ZICXR/A-Stock-Skills.svg)](https://github.com/ZICXR/A-Stock-Skills)
 
 ---
@@ -69,7 +69,7 @@
 | [north-capital-tracker](./skills/03-market-analysis/north-capital-tracker/) | 北向资金专项追踪 |
 | [margin-trading-analysis](./skills/03-market-analysis/margin-trading-analysis/) | 两融余额 + 杠杆资金 |
 
-### 🎯 Layer 4: 个股分析层 (7)
+### 🎯 Layer 4: 个股分析层 (8)
 
 | Skill | 说明 |
 |-------|------|
@@ -80,6 +80,7 @@
 | [stock-financial-analysis](./skills/04-stock-analysis/stock-financial-analysis/) | 三表 + 杜邦 + 财务质量 |
 | [stock-money-flow](./skills/04-stock-analysis/stock-money-flow/) | 个股资金流 + 主力动向 |
 | [stock-position-analysis](./skills/04-stock-analysis/stock-position-analysis/) | 十大股东 + 增减持 |
+| **🆕 [industry-comparison](./skills/04-stock-analysis/industry-comparison/)** | **同业对比 (7 维度) + 行业龙头识别** |
 
 ### 📊 Layer 5: 量化策略层 (4)
 
@@ -87,8 +88,10 @@
 |-------|------|
 | [factor-analysis](./skills/05-quant/factor-analysis/) | 多因子分析 + IC 计算 |
 | [strategy-backtest](./skills/05-quant/strategy-backtest/) | 策略回测 + 夏普/回撤 |
-| [signal-screener](./skills/05-quant/signal-screener/) | 条件选股 + 信号扫描 |
+| [signal-screener](./skills/05-quant/signal-screener/) | 内置条件选股 + 信号扫描 |
 | [risk-management](./skills/05-quant/risk-management/) | VaR + 仓位 + 止损 |
+| **🆕 [portfolio-optimizer](./skills/05-quant/portfolio-optimizer/)** | **组合优化 (马科维茨/风险平价/最大夏普)** |
+| **🆕 [stock-screener-custom](./skills/05-quant/stock-screener-custom/)** | **自定义条件筛选 + 策略保存** |
 
 ### 📝 Layer 6: 报告层 (2)
 
@@ -96,6 +99,7 @@
 |-------|------|
 | [daily-market-report](./skills/05-reports/daily-market-report/) | 每日 A 股复盘 (Markdown) |
 | [stock-research-report](./skills/05-reports/stock-research-report/) | 个股深度研究报告 |
+| **🆕 [portfolio-report](./skills/05-reports/portfolio-report/)** | **持仓报告 + 盈亏/行业/调仓建议** |
 
 ---
 
