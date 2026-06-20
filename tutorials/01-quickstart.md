@@ -1,305 +1,311 @@
 # 🚀 快速上手指南
 
-> 30分钟掌握 A-Stock-Skills
+> 30 分钟掌握 A-Stock-Skills
 
 ## 📋 目录
 
+- [什么是 Claude Agent Skills](#什么是-claude-agent-skills)
 - [环境准备](#环境准备)
-- [第一个程序](#第一个程序)
-- [5大常用场景](#5大常用场景)
-- [进阶组合用法](#进阶组合用法)
+- [安装 Skills](#安装-skills)
+- [在 Claude Code 中使用](#在-claude-code-中使用)
+- [命令行使用](#命令行使用)
+- [Python API 使用](#python-api-使用)
+
+---
+
+## 什么是 Claude Agent Skills
+
+**Agent Skills** 是 Anthropic 推出的 Claude 扩展机制。每个 Skill 包含:
+- `SKILL.md` - YAML frontmatter + 完整说明 (Claude 读取)
+- `main.py` - 可执行脚本 (Claude 调用)
+
+Claude 会自动扫描所有 Skills,根据用户请求自动激活匹配的 Skill。
 
 ---
 
 ## 环境准备
 
-### 1. 安装 Python
-
-需要 Python 3.8 或更高版本。
+### 1. 安装 Python 3.8+
 
 ```bash
 python --version
 ```
 
-### 2. 克隆项目
+### 2. 安装 Claude Code
 
 ```bash
-git clone https://github.com/ZICXR/A-Stock-Skills.git
-cd A-Stock-Skills
+npm install -g @anthropic-ai/claude-code
 ```
 
 ### 3. 安装依赖
 
 ```bash
+git clone https://github.com/ZICXR/A-Stock-Skills.git
+cd A-Stock-Skills
 pip install -r requirements.txt
-```
-
-或手动安装：
-
-```bash
-pip install akshare tushare pandas numpy requests
 ```
 
 ### 4. (可选) 配置 Tushare Token
 
-Tushare 提供更高质量的数据, 但 akshare 已能覆盖 90%+ 需求。
-
 ```bash
-# Linux/Mac
-export TUSHARE_TOKEN="your_token_here"
-
-# Windows PowerShell
-$env:TUSHARE_TOKEN = "your_token_here"
-
-# Windows CMD
-set TUSHARE_TOKEN=your_token_here
+export TUSHARE_TOKEN="your_token_here"  # Linux/Mac
+$env:TUSHARE_TOKEN = "your_token_here"  # PowerShell
 ```
 
 ---
 
-## 第一个程序
+## 安装 Skills
 
-创建一个 `test.py`：
+### 方法 1: 项目级使用 (推荐)
+
+直接在项目目录中使用:
+
+```bash
+cd A-Stock-Skills
+claude
+```
+
+Claude 会自动发现 `skills/` 目录下的所有 Skills。
+
+### 方法 2: 全局安装
+
+复制到 Claude 全局 skills 目录:
+
+```bash
+# Linux/Mac
+mkdir -p ~/.claude/skills
+cp -r skills/* ~/.claude/skills/
+
+# Windows
+mkdir %USERPROFILE%\.claude\skills
+xcopy /E /I skills %USERPROFILE%\.claude\skills
+```
+
+---
+
+## 在 Claude Code 中使用
+
+### 启动 Claude
+
+```bash
+claude
+```
+
+### 触发 Skill
+
+在对话中,Claude 会根据你的请求自动激活对应 Skill:
+
+| 你的请求 | Claude 激活的 Skill |
+|---------|-------------------|
+| "分析平安银行的技术面" | `stock-technical-analysis` |
+| "今天有什么涨停板" | `limit-up-tracker` |
+| "生成今日复盘报告" | `daily-market-report` |
+| "今天哪些板块在涨" | `sector-analysis` |
+| "北向资金今天怎么样" | `capital-flow-analysis` |
+
+### 示例对话
+
+**示例 1: 涨停板分析**
+
+> 你: 帮我看看今天的涨停板
+>
+> Claude: [自动激活 limit-up-tracker Skill,调用 get_zt_pool,展示涨停板数据]
+
+**示例 2: 个股深度研究**
+
+> 你: 深度研究一下 000001
+>
+> Claude: [自动调用 stock-technical-analysis + stock-fundamental-analysis + stock-news-collector + capital-flow-analysis,生成综合报告]
+
+**示例 3: 每日复盘**
+
+> 你: 帮我生成今日复盘
+>
+> Claude: [自动激活 daily-market-report,生成完整 Markdown 报告并保存]
+
+---
+
+## 命令行使用
+
+每个 Skill 都提供 CLI 入口:
+
+### Skill 1: astock-data-source
+
+```bash
+python skills/01-infra/astock-data-source/main.py --list
+python skills/01-infra/astock-data-source/main.py get_realtime 000001
+python skills/01-infra/astock-data-source/main.py get_kline 000001 --days 60
+```
+
+### Skill 12: limit-up-tracker
+
+```bash
+# 当日涨停
+python skills/04-stock-analysis/limit-up-tracker/main.py pool
+
+# 炸板率
+python skills/04-stock-analysis/limit-up-tracker/main.py break
+
+# 涨停原因
+python skills/04-stock-analysis/limit-up-tracker/main.py reasons
+
+# 连板梯队
+python skills/04-stock-analysis/limit-up-tracker/main.py consecutive
+```
+
+### Skill 13: stock-technical-analysis
+
+```bash
+# 综合分析
+python skills/04-stock-analysis/stock-technical-analysis/main.py full 000001
+
+# 仅趋势
+python skills/04-stock-analysis/stock-technical-analysis/main.py trend 000001
+
+# 仅买卖信号
+python skills/04-stock-analysis/stock-technical-analysis/main.py signal 000001
+```
+
+### Skill 15: daily-market-report
+
+```bash
+# 生成今日报告
+python skills/05-reports/daily-market-report/main.py
+
+# 指定日期
+python skills/05-reports/daily-market-report/main.py --date 2024-12-30
+
+# 指定保存路径
+python skills/05-reports/daily-market-report/main.py --save ./my_report.md
+```
+
+---
+
+## Python API 使用
 
 ```python
 import sys
 sys.path.insert(0, ".")
 
-# 获取平安银行(000001)实时行情
-from skills.02-data-collection.stock-basic-info.stock_basic_info import get_stock_realtime
-
-info = get_stock_realtime("000001")
-print(f"股票名称: {info['name']}")
-print(f"最新价: {info['price']}")
-print(f"涨跌幅: {info['pct_change']}%")
-```
-
-运行：
-
-```bash
-python test.py
-```
-
-预期输出：
-
-```
-股票名称: 平安银行
-最新价: 12.34
-涨跌幅: 1.25%
-```
-
-✅ **恭喜! 你已成功运行 A-Stock-Skills**
-
----
-
-## 5大常用场景
-
-### 场景 1: 查看大盘走势
-
-```python
-from skills.03-market-analysis.market-analysis.market_analysis import full_market_analysis
-
-# 分析上证指数
-result = full_market_analysis("000001", days=60)
-
-print(f"趋势: {result['trend']['overall']}")
-print(f"建议: {result['advice']}")
-print(f"信号:")
-for s in result['trend']['signals']:
-    print(f"  - {s['name']}: {s['desc']}")
-```
-
-### 场景 2: 找涨停板强势股
-
-```python
-from skills.04-stock-analysis.limit-up-tracker.limit_up_tracker import (
-    get_zt_pool, evaluate_zt_strength
+# 数据采集层
+from skills.02-data-collection.stock-basic-info.stock_basic_info.main import (
+    get_realtime, get_stock_info
+)
+from skills.02-data-collection.stock-news-collector.stock_news_collector.main import (
+    get_stock_news, summarize_sentiment
 )
 
-# 获取当日涨停板
-zt_df = get_zt_pool()
-print(f"今日涨停数: {len(zt_df)}")
-
-# 评估每只涨停股强度
-for _, row in zt_df.iterrows():
-    strength = evaluate_zt_strength(row)
-    if strength['score'] >= 4:  # 强涨停
-        print(f"{row['name']} 强度: {strength['level']} ({strength['score']}分)")
-        print(f"  因素: {', '.join(strength['factors'])}")
-```
-
-### 场景 3: 追踪主力资金
-
-```python
-from skills.03-market-analysis.capital-flow-analysis.capital_flow_analysis import (
-    get_market_fund_flow, get_north_bound_today
+# 市场分析层
+from skills.03-market-analysis.sector-analysis.sector_analysis.main import identify_main_themes
+from skills.03-market-analysis.capital-flow-analysis.capital_flow_analysis.main import (
+    get_north_bound_today, get_stock_fund_flow
 )
 
-# 大盘资金流
-mf = get_market_fund_flow()
-print("大盘资金流:")
-for market, data in mf.items():
-    print(f"  {market} 主力净流入: {data.get('main_net', 0)}")
+# 个股分析层
+from skills.04-stock-analysis.stock-technical-analysis.stock_technical_analysis.main import full_technical_analysis
+from skills.04-stock-analysis.stock-fundamental-analysis.stock_fundamental_analysis.main import full_fundamental_analysis
+from skills.04-stock-analysis.limit-up-tracker.limit_up_tracker.main import get_zt_pool, evaluate_zt_strength
 
-# 北向资金
-nb = get_north_bound_today()
-print(f"\n北向资金: {nb}")
-```
+# 报告层
+from skills.05-reports.daily-market-report.daily_market_report.main import generate_daily_report
 
-### 场景 4: 板块轮动分析
+# 1. 个股实时行情
+rt = get_realtime("000001")
+print(f"平安银行: {rt['price']} ({rt['pct_change']:+.2f}%)")
 
-```python
-from skills.03-market-analysis.sector-analysis.sector_analysis import (
-    identify_main_themes, top_fund_inflow
-)
+# 2. 技术面
+tech = full_technical_analysis("000001")
+print(f"技术: {tech['trading_signal']}")
 
-# 主线板块
-themes = identify_main_themes(top_n=5)
-print("=== 当前主线板块 ===")
-for t in themes.get("main_themes", [])[:5]:
-    print(f"[{t['type']}] {t['name']}: {t.get('pct_change', 0):.2f}%")
-
-# 资金流入 Top 5
-print("\n=== 3日资金流入 Top 5 ===")
-inflow = top_fund_inflow(period="3日", top_n=5)
-print(inflow[["name", "pct_change", "main_net"]])
-```
-
-### 场景 5: 一键生成每日复盘报告
-
-```python
-from skills.05-reports.daily-market-report.daily_market_report import generate_daily_report
-
-# 生成今日复盘报告
-report = generate_daily_report()
-# 自动保存为 daily_report_YYYY-MM-DD.md
-print("报告生成完毕! 请查看 daily_report_*.md")
-```
-
----
-
-## 进阶组合用法
-
-### 组合 1: 个股深度研究
-
-```python
-from skills.02-data-collection.stock-basic-info.stock_basic_info import get_stock_card
-from skills.04-stock-analysis.stock-technical-analysis.stock_technical_analysis import full_technical_analysis
-from skills.04-stock-analysis.stock-fundamental-analysis.stock_fundamental_analysis import full_fundamental_analysis
-from skills.03-market-analysis.capital-flow-analysis.capital_flow_analysis import get_stock_fund_flow
-
-code = "000001"
-print(f"=== {code} 深度研究 ===\n")
-
-# 基础信息
-card = get_stock_card(code)
-print(f"公司: {card['basic'].get('股票简称', card['realtime'].get('name'))}")
-print(f"行业: {card['basic'].get('行业', 'N/A')}")
-print(f"现价: {card['realtime'].get('price')}")
-
-# 技术面
-tech = full_technical_analysis(code)
-print(f"\n技术面: {tech['trading_signal']['signal']} ({tech['trading_signal']['strength']})")
-
-# 基本面
-fund = full_fundamental_analysis(code)
+# 3. 基本面
+fund = full_fundamental_analysis("000001")
 print(f"基本面: {fund['rating']} (评分: {fund['score']})")
 
-# 资金面
-flow = get_stock_fund_flow(code, days=5)
-print(f"资金面: 5日资金流数据 {len(flow)} 条")
-```
+# 4. 新闻情绪
+news = get_stock_news("000001", max_count=20)
+sent = summarize_sentiment(news)
+print(f"舆情: {sent['label']}")
 
-### 组合 2: 涨停+龙虎榜联动
-
-```python
-from skills.04-stock-analysis.limit-up-tracker.limit_up_tracker import get_zt_pool
-from skills.03-market-analysis.dragon-tiger-analysis.dragon_tiger_analysis import get_lhb_detail
-
-# 涨停股
+# 5. 涨停板
 zt = get_zt_pool()
-zt_codes = set(zt["code"].tolist()) if "code" in zt.columns else set()
+for _, row in zt.head(5).iterrows():
+    s = evaluate_zt_strength(row)
+    print(f"{row['name']}: {s['level']} ({s['score']}分)")
 
-# 龙虎榜
-lhb = get_lhb_detail()
-if not lhb.empty and "代码" in lhb.columns:
-    lhb_codes = set(lhb["代码"].astype(str).tolist())
+# 6. 主线板块
+themes = identify_main_themes(top_n=3)
+for t in themes["main_themes"][:3]:
+    print(f"[{t['type']}] {t['name']}: {t['pct_change']:+.2f}%")
 
-    # 涨停 + 龙虎榜交集
-    both = zt_codes & lhb_codes
-    print(f"涨停且上榜: {len(both)} 只")
-    for code in both:
-        name = zt[zt["code"] == code]["name"].iloc[0] if "name" in zt.columns else ""
-        print(f"  {code} {name}")
-```
-
-### 组合 3: 自定义选股策略
-
-```python
-from skills.01-infra.astock-utils.astock_utils import add_all_indicators
-from skills.02-data-collection.stock-basic-info.stock_basic_info import get_stock_realtime
-import akshare as ak
-
-# 策略: MACD金叉 + 放量 + 站上20日均线
-candidates = []
-
-# 获取全A股
-df = ak.stock_zh_a_spot_em()
-for _, row in df.head(50).iterrows():  # 演示只取前50
-    code = row["代码"]
-    try:
-        hist = ak.stock_zh_a_hist(symbol=code, period="daily",
-                                  start_date="20240101",
-                                  end_date="20241231",
-                                  adjust="qfq")
-        hist = add_all_indicators(hist)
-        if len(hist) < 30:
-            continue
-        last = hist.iloc[-1]
-        prev = hist.iloc[-2]
-
-        # 条件: MACD金叉 + 放量 + close>MA20
-        if (last["DIF"] > last["DEA"] and prev["DIF"] <= prev["DEA"] and
-            last["volume"] > hist["volume"].tail(5).mean() * 1.5 and
-            last["close"] > last["MA20"]):
-            candidates.append({
-                "code": code,
-                "name": row["名称"],
-                "price": last["close"],
-                "pct_change": row["涨跌幅"]
-            })
-    except:
-        continue
-
-print(f"找到 {len(candidates)} 只符合条件的股票")
-for c in candidates[:10]:
-    print(c)
+# 7. 一键生成报告
+report = generate_daily_report()
 ```
 
 ---
 
-## ⚠️ 常见问题
+## 🎯 实战场景
 
-### Q1: 报错 "ModuleNotFoundError: No module named 'akshare'"
+### 场景 1: 选股策略
 
-```bash
-pip install akshare
-```
+> 你: 帮我找出 MACD 金叉 + 站上 20 日均线 + 放量的股票
+>
+> Claude: [自动激活 astock-data-source 获取全A股 + stock-technical-analysis 的工具函数,编写组合选股脚本]
 
-### Q2: 接口调用失败/超时
+### 场景 2: 涨停板研究
+
+> 你: 今天的涨停板,哪些是强势涨停?它们的共同特征是什么?
+>
+> Claude: [调用 limit-up-tracker 的 evaluate_zt_strength 评估,分析强势涨停的特征]
+
+### 场景 3: 板块轮动监控
+
+> 你: 现在的主线板块是什么?资金在流入哪些?
+>
+> Claude: [调用 sector-analysis 的 identify_main_themes + capital-flow-analysis]
+
+### 场景 4: 个股风险评估
+
+> 你: 帮我看看 600519 的风险点
+>
+> Claude: [综合 stock-fundamental-analysis + announcement-collector + stock-news-collector,输出风险评估]
+
+---
+
+## ❓ 常见问题
+
+### Q1: Claude 怎么知道使用哪个 Skill?
+
+每个 Skill 的 `SKILL.md` 都有详细的 `description`,Claude 会根据你的请求语义匹配最合适的 Skill。
+
+### Q2: Skills 之间如何协作?
+
+Claude 可以同时激活多个 Skill,组合使用。例如 "分析 000001" 可能同时调用:
+- `stock-basic-info` (基本信息)
+- `stock-technical-analysis` (技术面)
+- `stock-fundamental-analysis` (基本面)
+- `stock-news-collector` (舆情)
+- `capital-flow-analysis` (资金流)
+
+### Q3: 不使用 Claude Code 可以吗?
+
+完全可以!所有 Skill 都提供:
+- ✅ CLI 命令行
+- ✅ Python API
+- ✅ 独立可执行
+
+### Q4: 数据获取失败?
 
 - 检查网络
-- akshare 接口偶有调整, 可升级: `pip install -U akshare`
-- 项目已内置重试和降级机制
+- akshare 升级: `pip install -U akshare`
+- 项目已内置重试机制
 
-### Q3: Tushare 接口报 token 错误
+### Q5: Tushare 报 token 错误?
 
-Tushare 需要注册并获取 token, 但 **akshare 已能满足大部分需求**。
+```bash
+export TUSHARE_TOKEN="your_token"
+```
 
-### Q4: 数据返回空 DataFrame
-
-- 可能是非交易日
-- 检查代码是否正确 (6位, 不带前缀)
+Tushare 需要注册,但 akshare 已能满足 90% 需求。
 
 ---
 
@@ -307,8 +313,8 @@ Tushare 需要注册并获取 token, 但 **akshare 已能满足大部分需求**
 
 - 📖 [Skill 详细使用手册](./02-skill-usage.md)
 - 📖 [实战案例集](./03-workflow-examples.md)
-- 📖 [最佳实践](./04-best-practices.md)
+- 📖 [Claude Agent Skills 规范](https://docs.claude.com/en/docs/agents-and-tools/agent-skills/overview)
 
 ---
 
-💡 **提示**: 建议配合 [Claude Code](https://claude.com/claude-code) 或其他 AI 工具使用, 可以让 AI 直接调用这些 Skills 完成分析任务!
+💡 **提示**: 配合 Claude Code 使用效果最佳,Claude 会自动选择合适的 Skill 并组合使用!

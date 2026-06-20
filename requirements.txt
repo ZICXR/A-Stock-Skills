@@ -1,5 +1,5 @@
-# A-Stock-Skills 依赖
-# Python 3.8+
+# A-Stock-Skills 全局依赖
+# 推荐安装,各 Skill 内部已声明各自依赖
 
 # 数据源
 akshare>=1.12.0          # 主要数据源 (免费、覆盖全)
