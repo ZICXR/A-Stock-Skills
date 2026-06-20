@@ -1,0 +1,15 @@
+# A-Stock-Skills 依赖
+# Python 3.8+
+
+# 数据源
+akshare>=1.12.0          # 主要数据源 (免费、覆盖全)
+tushare>=1.4.0           # 高质量数据 (可选, 需要token)
+requests>=2.28.0         # HTTP请求
+
+# 数据处理
+pandas>=1.5.0
+numpy>=1.22.0
+
+# 工具
+python-dateutil>=2.8.0
+pytz>=2022.1

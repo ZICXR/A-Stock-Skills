@@ -1,0 +1,58 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Cache
+cache/
+.cache/
+*.cache
+~/.astock_skills/
+
+# Reports (生成)
+daily_report_*.md
+research_*.md
+reports/
+
+# Logs
+*.log
+
+# Environment
+.env
+.env.local
+
+# 测试报告
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
