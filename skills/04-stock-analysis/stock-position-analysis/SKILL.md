@@ -1,6 +1,6 @@
 ---
 name: stock-position-analysis
-description: A 股个股股东分析。当用户需要分析某只股票的股东结构、十大股东、机构持仓、股东户数变化、大股东减持/增持时,Claude 应使用此 Skill。
+description: A 股个股股东分析。当用户需要分析某只股票的股东结构、前十大股东、机构持仓、股东户数变化 (筹码集中/分散)、大股东减持/增持、识别筹码集中信号时,Claude 应使用此 Skill。
 ---
 
 # A 股个股股东分析 Skill

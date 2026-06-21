@@ -1,6 +1,6 @@
 ---
 name: stock-screener-custom
-description: A 股自定义条件筛选器。当用户需要按自定义的任意条件组合筛选股票 (例如 "市值 50-200 亿 + PE < 20 + ROE > 15% + 站上 20 日均线") 时,Claude 应使用此 Skill。支持配置文件保存常用策略、定时扫描、多条件 AND/OR 组合。
+description: A 股自定义条件筛选器。当用户需要按任意条件组合筛选股票 (例如 "市值 50-200 亿 + PE < 20 + ROE > 15% + 站上 20 日均线") 时,Claude 应使用此 Skill。支持 11 种字段、9 种操作符 (>/</> = /<=/between/in 等)、保存策略为 YAML 复用、5 个内置策略模板 (value/growth/small_cap/momentum/low_pe_high_roe)。
 ---
 
 # A 股自定义条件筛选器 Skill

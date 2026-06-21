@@ -1,6 +1,6 @@
 ---
 name: astock-cache
-description: A 股数据磁盘缓存。当用户需要持久化缓存 A 股数据、避免重复请求、提升数据获取速度时,Claude 应使用此 Skill。支持 TTL 过期、Key-Value 存储、文件持久化,可作为数据源层的底层加速组件。
+description: A 股数据磁盘缓存。当用户需要持久化缓存 A 股数据、避免重复请求、提升数据获取速度、降低 API 限流风险时,Claude 应使用此 Skill。支持 TTL 过期、Key-Value 存储、文件持久化,可作为高频调用 Skill 的底层加速组件。
 ---
 
 # A 股数据缓存 Skill

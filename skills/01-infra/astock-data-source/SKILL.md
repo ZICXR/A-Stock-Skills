@@ -1,6 +1,6 @@
 ---
 name: astock-data-source
-description: A 股多源数据源统一管理。当用户需要获取股票行情、K 线、财务数据、新闻、公告、资金流等数据时,Claude 应优先使用此 Skill 作为数据访问入口。它封装了 akshare、tushare、东方财富三大主流数据源,提供自动重试、限流控制、失败降级、内存缓存等机制,确保稳定可靠的数据获取。
+description: A 股多源数据源统一管理 (akshare + tushare + 东方财富)。当用户需要获取股票行情/K线/财务数据/新闻/公告/资金流等任何 A 股数据,或需要稳定的 API 封装 (含自动重试/限流/降级/缓存) 时,Claude 应优先使用此 Skill 作为数据访问入口。这是其他所有 Skill 的基础数据源。
 ---
 
 # A 股多源数据源管理 Skill

@@ -1,6 +1,6 @@
 ---
 name: margin-trading-analysis
-description: A 股两融分析。当用户需要查看融资融券余额变化、融资买入额、融券卖出量、两融余额占流通市值比、识别杠杆资金动向时,Claude 应使用此 Skill。
+description: A 股两融分析。当用户需要查看融资融券余额变化、融资买入额、融券卖出量、两融余额占流通市值比、识别杠杆资金动向 (过热/恐慌/偏多/偏空) 时,Claude 应使用此 Skill。
 ---
 
 # A 股两融分析 Skill

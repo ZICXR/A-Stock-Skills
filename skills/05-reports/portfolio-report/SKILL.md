@@ -1,6 +1,6 @@
 ---
 name: portfolio-report
-description: A 股持仓报告生成。当用户需要生成完整持仓分析报告 (盈亏统计/风险敞口/行业分布/调仓建议) 时,Claude 应使用此 Skill。与 watchlist-monitor 配合, 形成"监控+报告"完整闭环。
+description: A 股持仓报告生成。当用户需要生成完整持仓分析报告 (5 大部分: 总览/盈亏明细/行业分布/风险敞口/调仓建议) 时,Claude 应使用此 Skill。与 watchlist-monitor 配合, 形成"监控+报告"完整闭环。
 ---
 
 # A 股持仓报告 Skill

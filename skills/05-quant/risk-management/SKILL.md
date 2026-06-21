@@ -1,6 +1,6 @@
 ---
 name: risk-management
-description: A 股风险管理。当用户需要计算组合风险指标 (VaR/最大回撤/夏普/波动率)、仓位管理建议、止损止盈设置时,Claude 应使用此 Skill。
+description: A 股风险管理。当用户需要计算风险指标 (VaR 在险价值 / 最大回撤 / 夏普比率 / 波动率)、仓位管理建议 (凯利公式)、止损止盈设置 (基于 ATR 波动率) 时,Claude 应使用此 Skill。
 ---
 
 # A 股风险管理 Skill

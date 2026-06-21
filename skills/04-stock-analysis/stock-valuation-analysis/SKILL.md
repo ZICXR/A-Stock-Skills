@@ -1,6 +1,6 @@
 ---
 name: stock-valuation-analysis
-description: A 股个股估值分析。当用户需要深入分析某只股票的估值水平时,Claude 应使用此 Skill。支持 PE/PB/PS 历史分位、PEG 估值、行业相对估值、估值百分位排名。
+description: A 股个股估值深度分析。当用户需要深入分析某只股票的估值水平 (PE/PB/PS 历史分位、PEG 估值、行业相对估值、估值百分位排名 7 档评级: 严重低估/低估/合理/合理偏高/高估) 时,Claude 应使用此 Skill。
 ---
 
 # A 股个股估值分析 Skill

@@ -1,6 +1,6 @@
 ---
 name: advanced-backtest
-description: A 股专业级回测引擎。当用户需要进行更真实的回测 (含交易成本/滑点/印花税/手续费/仓位管理/止盈止损) 时,Claude 应使用此 Skill。支持 T+1、佣金、印花税、滑点等真实交易约束。
+description: A 股专业级回测引擎。当用户需要进行更真实的回测 (含 A 股交易成本: 佣金 0.025% + 印花税 0.1% + 过户费 0.001% + 滑点 + 5 种仓位管理 + 止盈止损) 时,Claude 应使用此 Skill。相较 strategy-backtest 更接近真实交易。
 ---
 
 # A 股专业回测引擎 Skill

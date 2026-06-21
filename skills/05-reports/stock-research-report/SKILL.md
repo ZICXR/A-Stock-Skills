@@ -1,6 +1,6 @@
 ---
 name: stock-research-report
-description: A 股个股深度研究报告生成。当用户需要对某只股票生成完整的研究报告 (Markdown 格式, 涵盖技术/基本面/资金/估值/股东/情绪全维度) 时,Claude 应使用此 Skill。可整合所有 Layer 1-4 数据。
+description: A 股个股深度研究报告生成。当用户需要对某只股票生成完整的研究报告 (Markdown 格式, 7 大部分: 公司概况/技术面/基本面/估值/资金面/舆情/投资建议) 时,Claude 应使用此 Skill。整合所有 Layer 1-4 数据,自动保存为 research_<code>_<date>.md。
 ---
 
 # A 股个股深度研究报告 Skill

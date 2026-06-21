@@ -1,6 +1,6 @@
 ---
 name: portfolio-optimizer
-description: A 股投资组合优化。当用户需要构建最优投资组合 (基于马科维茨均值方差模型)、风险平价、最大化夏普比率、最小化方差时,Claude 应使用此 Skill。支持协方差矩阵计算、有效前沿、行业分散度控制。
+description: A 股投资组合优化。当用户需要构建最优投资组合 (基于马科维茨均值方差模型)、风险平价、最大化夏普比率、最小化方差、计算有效前沿时,Claude 应使用此 Skill。支持 5 种优化方法 (max_sharpe/min_volatility/risk_parity/equal_weight/max_diversification)。
 ---
 
 # A 股投资组合优化 Skill

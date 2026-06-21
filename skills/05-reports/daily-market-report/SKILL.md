@@ -1,6 +1,6 @@
 ---
 name: daily-market-report
-description: A 股每日复盘报告生成。当用户需要生成每日 A 股复盘报告 (Markdown 格式,包含大盘/板块/涨停/资金/龙虎榜全维度信息) 时,Claude 应使用此 Skill。可自动整合所有 Layer 1-4 的数据和分析结果。
+description: A 股每日复盘报告生成。当用户需要生成每日 A 股复盘报告 (Markdown 格式, 5 大部分: 大盘表现/板块热点/涨停板/资金流向/龙虎榜) 时,Claude 应使用此 Skill。整合所有 Layer 1-4 数据,自动保存为 daily_report_YYYY-MM-DD.md。
 ---
 
 # A 股每日复盘报告 Skill

@@ -1,6 +1,6 @@
 ---
 name: factor-analysis
-description: A 股多因子选股分析。当用户需要进行多因子选股 (动量/价值/质量/成长/波动) 时,Claude 应使用此 Skill。支持 IC 计算、因子合成、因子有效性评估、Rank IC 等专业量化指标。
+description: A 股多因子选股分析。当用户需要进行多因子选股 (动量/价值/质量/成长/波动/流动性 8 大因子) 时,Claude 应使用此 Skill。支持单因子计算、多因子综合评分、IC (Information Coefficient) 评估 (|IC|>0.05 强有效)。
 ---
 
 # A 股多因子分析 Skill

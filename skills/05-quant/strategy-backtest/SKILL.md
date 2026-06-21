@@ -1,6 +1,6 @@
 ---
 name: strategy-backtest
-description: A 股量化策略回测。当用户需要对某个交易策略 (均线交叉/MACD/涨停打板等) 进行历史回测时,Claude 应使用此 Skill。支持年化收益、夏普比率、最大回撤、胜率等关键指标计算。
+description: A 股量化策略回测。当用户需要对某个交易策略 (均线交叉 / MACD 金叉死叉 / 动量策略) 进行历史回测时,Claude 应使用此 Skill。支持年化收益、夏普比率、最大回撤、胜率、盈亏比等关键指标计算。
 ---
 
 # A 股策略回测 Skill

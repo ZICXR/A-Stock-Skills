@@ -1,6 +1,6 @@
 ---
 name: signal-screener
-description: A 股股票信号筛选器。当用户需要按特定条件筛选股票 (MACD 金叉 + 站上 20 日均线 + 放量 等) 时,Claude 应使用此 Skill。支持组合条件、技术形态筛选、自定义选股策略。
+description: A 股股票信号筛选器。当用户需要按特定技术条件筛选股票 (MACD 金叉 + 站上 20 日均线 + 放量 等) 时,Claude 应使用此 Skill。支持 12 种内置技术信号 (ma_cross/macd/above_ma/volume_break/rsi/kdj/new_high 等)、多条件 AND/OR 组合扫描。
 ---
 
 # A 股信号筛选器 Skill
