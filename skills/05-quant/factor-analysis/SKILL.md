@@ -1,67 +1,65 @@
 ---
 name: factor-analysis
-description: A 股多因子选股分析。当用户需要进行多因子选股 (动量/价值/质量/成长/波动/流动性 8 大因子) 时,Claude 应使用此 Skill。支持单因子计算、多因子综合评分、IC (Information Coefficient) 评估 (|IC|>0.05 强有效)。
+description: A 股多因子分析 (传统 + ML 增强版)。当用户需要进行多因子选股 (动量/价值/质量/成长/波动/流动性 8 大因子) 时,Claude 应使用此 Skill。支持传统加权评分 + ML 集成学习 (LightGBM/XGBoost) + IC 评估 (|IC|>0.05 强有效)。是 factor-analysis + ml-factor 合并的统一版本。
 ---
 
-# A 股多因子分析 Skill
+# A 股多因子分析 Skill (统一版)
 
 ## 何时使用
 
 - 用户需要多因子选股
 - 用户需要因子有效性评估
 - 用户需要因子 IC 计算
-- 用户需要量化选股模型
+- 用户需要 ML 增强因子 (新)
 
-## 因子库 (内置)
+## 2 大模式
 
-| 因子 | 类别 | 说明 |
+| 模式 | 命令 | 适用 |
 |------|------|------|
-| momentum_20 | 动量 | 20日涨跌幅 |
-| momentum_60 | 动量 | 60日涨跌幅 |
-| value_pe | 价值 | PE 倒数 |
-| value_pb | 价值 | PB 倒数 |
-| quality_roe | 质量 | ROE |
-| growth_revenue | 成长 | 营收增长率 |
-| growth_profit | 成长 | 净利润增长率 |
-| volatility_20 | 波动 | 20日波动率 |
-| turnover_20 | 流动性 | 20日均换手率 |
+| 传统加权 | `score` | 快速, 可解释 |
+| ML 增强 | `train-ml` + `ml-rank` | 更准确, 自动学习 |
 
 ## 提供能力
 
-- `calc_factor(stocks, factor_name)` - 计算单因子
-- `calc_all_factors(stocks)` - 计算全因子
-- `factor_ic(factor, returns)` - 计算 IC
-- `factor_quantile(factor, n)` - 因子分组
-- `multi_factor_score(factors)` - 多因子合成
+### 传统
+- `calc_factor()` - 单因子
+- `calc_all_factors()` - 8 因子
+- `multi_factor_score()` - 综合评分
+
+### ML
+- `train_ml_model()` - 训练 LightGBM/XGBoost
+- `ml_rank()` - 全市场排序
+
+### 通用
+- `calc_ic()` - IC 评估
 
 ## 使用方式
 
 ```bash
+# 传统
 python main.py calc 000001 momentum_20
-python main.py ic --factor momentum_20
-python main.py score --top 20
+python main.py all 000001
+python main.py score --codes 000001,600519 --top 20
+
+# ML
+python main.py train-ml --top 500 --model lightgbm
+python main.py ml-rank --top 30
 ```
 
 ## Python API
 
 ```python
 from skills.05-quant.factor-analysis.main import (
-    calc_factor, factor_ic, multi_factor_score
+    calc_factor, multi_factor_score, ml_rank
 )
 
-# 单因子
-mom = calc_factor("000001", "momentum_20")
+# 传统
+factors = calc_all_factors("000001")
+score = multi_factor_score(["000001", "600519"])
 
-# 多因子评分
-scores = multi_factor_score(stocks)
+# ML
+top = ml_rank(30)
 ```
-
-## IC (Information Coefficient)
-
-衡量因子预测能力:
-- |IC| > 0.05: 强有效
-- 0.02 < |IC| < 0.05: 有效
-- |IC| < 0.02: 弱有效
 
 ## 依赖
 
@@ -69,4 +67,11 @@ scores = multi_factor_score(stocks)
 akshare>=1.12.0
 pandas>=1.5.0
 numpy>=1.22.0
+scikit-learn>=1.3.0
+lightgbm>=4.0.0  (ML 模式)
+xgboost>=2.0.0   (ML 模式)
 ```
+
+## 合并历史
+
+本 Skill 由原 `factor-analysis` + `ml-factor` 合并而成, 节省 1 个 Skill。

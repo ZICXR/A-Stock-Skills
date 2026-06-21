@@ -1,10 +1,10 @@
 # 📈 A-Stock-Skills
 
-> 🇨🇳 专业级 A 股分析 Claude Agent Skills 库 | 45 个即插即用 Skills 覆盖数据采集 / 大盘分析 / 资金流向 / 涨停追踪 / 个股研究 / 量化策略 / ML 量化 / 工具集成 / 智能报告
+> 🇨🇳 专业级 A 股分析 Claude Agent Skills 库 | 39 个即插即用 Skills 覆盖数据采集 / 大盘分析 / 资金流向 / 涨停追踪 / 个股研究 / 量化策略 / ML 量化 / 工具集成 / 智能报告
 
 [![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-45-orange.svg)](#-技能目录)
+[![Skills](https://img.shields.io/badge/skills-39-orange.svg)](#-技能目录)
 [![GitHub stars](https://img.shields.io/github/stars/ZICXR/A-Stock-Skills.svg)](https://github.com/ZICXR/A-Stock-Skills)
 
 ---
@@ -86,21 +86,17 @@
 
 | Skill | 说明 |
 |-------|------|
-| [factor-analysis](./skills/05-quant/factor-analysis/) | 多因子分析 + IC 计算 |
-| [strategy-backtest](./skills/05-quant/strategy-backtest/) | 策略回测 + 夏普/回撤 |
-| [signal-screener](./skills/05-quant/signal-screener/) | 内置条件选股 + 信号扫描 |
+| [factor-analysis](./skills/05-quant/factor-analysis/) | 多因子分析 (传统 + ML 增强) + IC 计算 |
+| [backtest](./skills/05-quant/backtest/) | 策略回测 (3合1: 基础/专业/多信号) |
+| [screener](./skills/05-quant/screener/) | 选股 (2合1: 内置信号 + 自定义条件) |
 | [risk-management](./skills/05-quant/risk-management/) | VaR + 仓位 + 止损 |
 | [portfolio-optimizer](./skills/05-quant/portfolio-optimizer/) | 组合优化 (马科维茨/风险平价/最大夏普) |
-| [stock-screener-custom](./skills/05-quant/stock-screener-custom/) | 自定义条件筛选 + 策略保存 |
-| **🆕 [multi-signal-backtest](./skills/05-quant/multi-signal-backtest/)** | **多信号组合回测 (AND/OR + 持仓周期)** |
 
 ### 📝 Layer 6: 报告层 (2)
 
 | Skill | 说明 |
 |-------|------|
-| [daily-market-report](./skills/05-reports/daily-market-report/) | 每日 A 股复盘 (Markdown) |
-| [stock-research-report](./skills/05-reports/stock-research-report/) | 个股深度研究报告 |
-| **🆕 [portfolio-report](./skills/05-reports/portfolio-report/)** | **持仓报告 + 盈亏/行业/调仓建议** |
+| [report](./skills/05-reports/report/) | 报告生成 (3合1: daily/stock/portfolio) |
 
 ### 🤖 Layer 7: ML 量化层 (4)
 
@@ -150,11 +146,11 @@ cp -r skills/* ~/.claude/skills/
 
 ### 3. 对话示例
 
-> @Claude 用 daily-market-report 生成今日复盘
+> @Claude 用 report daily 生成今日复盘
 >
 > @Claude 帮我用 watchlist-monitor 监控我的自选股
 >
-> @Claude 用 stock-research-report 深度研究 000001
+> @Claude 用 report stock 深度研究 000001
 >
 > @Claude 用 signal-screener 找出 MACD 金叉 + 站上 20 日均线的股票
 >
