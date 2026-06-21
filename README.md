@@ -1,10 +1,10 @@
 # 📈 A-Stock-Skills
 
-> 🇨🇳 专业级 A 股分析 Claude Agent Skills 库 | 43 个即插即用 Skills 覆盖数据采集 / 大盘分析 / 资金流向 / 涨停追踪 / 个股研究 / 量化策略 / ML 量化 / 工具集成 / 智能报告
+> 🇨🇳 专业级 A 股分析 Claude Agent Skills 库 | 45 个即插即用 Skills 覆盖数据采集 / 大盘分析 / 资金流向 / 涨停追踪 / 个股研究 / 量化策略 / ML 量化 / 工具集成 / 智能报告
 
 [![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-43-orange.svg)](#-技能目录)
+[![Skills](https://img.shields.io/badge/skills-45-orange.svg)](#-技能目录)
 [![GitHub stars](https://img.shields.io/github/stars/ZICXR/A-Stock-Skills.svg)](https://github.com/ZICXR/A-Stock-Skills)
 
 ---
@@ -90,8 +90,9 @@
 | [strategy-backtest](./skills/05-quant/strategy-backtest/) | 策略回测 + 夏普/回撤 |
 | [signal-screener](./skills/05-quant/signal-screener/) | 内置条件选股 + 信号扫描 |
 | [risk-management](./skills/05-quant/risk-management/) | VaR + 仓位 + 止损 |
-| **🆕 [portfolio-optimizer](./skills/05-quant/portfolio-optimizer/)** | **组合优化 (马科维茨/风险平价/最大夏普)** |
-| **🆕 [stock-screener-custom](./skills/05-quant/stock-screener-custom/)** | **自定义条件筛选 + 策略保存** |
+| [portfolio-optimizer](./skills/05-quant/portfolio-optimizer/) | 组合优化 (马科维茨/风险平价/最大夏普) |
+| [stock-screener-custom](./skills/05-quant/stock-screener-custom/) | 自定义条件筛选 + 策略保存 |
+| **🆕 [multi-signal-backtest](./skills/05-quant/multi-signal-backtest/)** | **多信号组合回测 (AND/OR + 持仓周期)** |
 
 ### 📝 Layer 6: 报告层 (2)
 
@@ -110,12 +111,13 @@
 | [ml-factor](./skills/05-ml/ml-factor/) | ML 多因子排序 (集成学习) |
 | [lstm-forecaster](./skills/05-ml/lstm-forecaster/) | 简易 LSTM 时序预测 (纯 numpy) |
 
-### 🛠️ Layer 8: 工具层 (2) 🆕
+### 🛠️ Layer 8: 工具层 (2)
 
 | Skill | 说明 |
 |-------|------|
 | [alerter](./skills/06-tools/alerter/) | 告警推送 (钉钉/微信/飞书/Slack/Telegram/Server酱) |
 | [portfolio-simulator](./skills/06-tools/portfolio-simulator/) | 虚拟持仓模拟器 (虚拟交易 + 业绩跟踪) |
+| **🆕 [strategy-scheduler](./skills/06-tools/strategy-scheduler/)** | **策略定时调度器 (cron + 告警联动)** |
 
 ### 🌐 Web UI (新增)
 
