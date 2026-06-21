@@ -1,10 +1,10 @@
 # 📈 A-Stock-Skills
 
-> 🇨🇳 专业级 A 股分析 Claude Agent Skills 库 | 41 个即插即用 Skills 覆盖数据采集 / 大盘分析 / 资金流向 / 涨停追踪 / 个股研究 / 量化策略 / ML 量化 / 智能报告
+> 🇨🇳 专业级 A 股分析 Claude Agent Skills 库 | 43 个即插即用 Skills 覆盖数据采集 / 大盘分析 / 资金流向 / 涨停追踪 / 个股研究 / 量化策略 / ML 量化 / 工具集成 / 智能报告
 
 [![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-41-orange.svg)](#-技能目录)
+[![Skills](https://img.shields.io/badge/skills-43-orange.svg)](#-技能目录)
 [![GitHub stars](https://img.shields.io/github/stars/ZICXR/A-Stock-Skills.svg)](https://github.com/ZICXR/A-Stock-Skills)
 
 ---
@@ -101,7 +101,7 @@
 | [stock-research-report](./skills/05-reports/stock-research-report/) | 个股深度研究报告 |
 | **🆕 [portfolio-report](./skills/05-reports/portfolio-report/)** | **持仓报告 + 盈亏/行业/调仓建议** |
 
-### 🤖 Layer 7: ML 量化层 (4) 🆕
+### 🤖 Layer 7: ML 量化层 (4)
 
 | Skill | 说明 |
 |-------|------|
@@ -109,6 +109,17 @@
 | [price-predictor](./skills/05-ml/price-predictor/) | ML 价格预测 (回归) |
 | [ml-factor](./skills/05-ml/ml-factor/) | ML 多因子排序 (集成学习) |
 | [lstm-forecaster](./skills/05-ml/lstm-forecaster/) | 简易 LSTM 时序预测 (纯 numpy) |
+
+### 🛠️ Layer 8: 工具层 (2) 🆕
+
+| Skill | 说明 |
+|-------|------|
+| [alerter](./skills/06-tools/alerter/) | 告警推送 (钉钉/微信/飞书/Slack/Telegram/Server酱) |
+| [portfolio-simulator](./skills/06-tools/portfolio-simulator/) | 虚拟持仓模拟器 (虚拟交易 + 业绩跟踪) |
+
+### 🌐 Web UI (新增)
+
+[webui/app.py](./webui/) - Streamlit 可视化仪表板, 启动 `streamlit run webui/app.py`
 
 ---
 
