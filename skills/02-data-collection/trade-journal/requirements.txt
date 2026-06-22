@@ -1,0 +1,1 @@
+# trade-journal 纯本地,无外部依赖
