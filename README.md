@@ -1,10 +1,10 @@
 # A-Stock-Skills
 
-**让 Claude 帮你看 A 股。** 10 个工具, 一次安装, 3 分钟跑通。
+## 一句话: 让 Claude 帮你看 A 股。
 
-跑全市场筛选 30 分钟? 缓存后只要 5 秒。住宅 IP 被东财封? 自动切到腾讯。AI 推荐 4 只不知道准不准? 30 天后看胜率。
+**不装插件, 不学新软件, 装好之后 Claude 自己会用。**
 
-## 安装
+## 上手 (3 行命令)
 
 ```bash
 git clone https://github.com/ZICXR/A-Stock-Skills.git
@@ -12,51 +12,60 @@ cd A-Stock-Skills
 pip install -r requirements.txt
 ```
 
-## 用法
-
 打开 Claude Code, 直接说:
+> "601991 现在多少钱?"
 
-> 帮我用 screener 找 PE 小于 20 的股票
->
-> 601991 现在多少钱?
->
-> 监控我的自选股, 涨 5% 提醒我
->
-> 记录一下这个推荐, 30 天后看准不准
+Claude 自动拉数据:
 
-Claude 会自己选工具、跑命令。
-
-## 工具列表
-
-- `astock-data-source` - 拿股票数据
-- `astock-cache` - 缓存, 跑一次, 之后 5 秒
-- `screener` - 全市场筛选
-- `watchlist-monitor` - 监控自选股
-- `stock-technical-analysis` - 算技术指标
-- `report` - 生成研报
-- `alerter` - 推送到钉钉/微信
-- `trade-journal` - 记录推荐, 30 天后看准不准
-- `astock-utils` - 工具函数
-- `start-here` - 入门指南
-
-## 命令行也能用
-
-```bash
-# 拿行情
-python skills/01-infra/astock-data-source/main.py get-realtime --code 601991
-
-# 筛选
-python skills/05-quant/screener/main.py screen --where "pe<20"
-
-# 跑一次缓存, 之后 5 秒
-python daily_update.py
+```
+601991 大唐发电  3.20  +5.26%  (数据源: 腾讯 ifzq)
 ```
 
-## 注意事项
+> "全市场 PE < 20, 涨 5% 以上的股票"
 
-- 不接券商账号, 交易还是你自己来
-- 数据来自公开接口, **不构成投资建议**
-- 投资有风险, 入市需谨慎
+```
+找到 23 只
+  600519  贵州茅台  1680  PE 18.5
+  300750  宁德时代   220  PE 19.2
+  ...
+```
+
+> "监控我的自选股, 涨 5% 推钉钉"
+
+```yaml
+# watchlist.yaml
+- 601991  大唐发电
+- 300750  宁德时代
+```
+
+收到推送, 30 天后看 `trade-journal` 统计 AI 推荐胜率: **58%**。
+
+## 跑过一次, 5 秒
+
+```bash
+python daily_update.py   # 首次 30 分钟
+python skills/05-quant/screener/main.py screen --where "pe<20"  # 5 秒
+```
+
+## 10 个工具
+
+| 名字 | 干啥 |
+|------|------|
+| `astock-data-source` | 拿行情 (4 源 fallback) |
+| `astock-cache` | 缓存 K 线 (parquet) |
+| `screener` | 全市场筛选 |
+| `watchlist-monitor` | 自选股监控 |
+| `stock-technical-analysis` | MA/MACD/KDJ/RSI |
+| `trade-journal` | AI 推荐 vs 实盘复盘 |
+| `report` | 生成研报 |
+| `alerter` | 钉钉/微信/飞书 |
+| `astock-utils` | 工具函数 |
+| `start-here` | 上手 |
+
+## 注意
+
+- 不接券商账号, **交易还是你来**
+- **不构成投资建议**, 投资有风险
 
 ## License
 
