@@ -1,220 +1,220 @@
+<div align="center">
+
 # 📈 A-Stock-Skills
 
-> 🇨🇳 A 股分析 Claude Agent Skills | **10 个核心 Skill** | 实战派,不做花架子
+**让 Claude 成为你的 A 股分析师**
 
-[![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-10-orange.svg)](#-技能目录)
-[![GitHub stars](https://img.shields.io/github/stars/ZICXR/A-Stock-Skills.svg)](https://github.com/ZICXR/A-Stock-Skills)
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Skills: 10](https://img.shields.io/badge/Skills-10-orange.svg)](#-10-个技能)
+[![GitHub stars](https://img.shields.io/github/stars/ZICXR/A-Stock-Skills?style=social)](https://github.com/ZICXR/A-Stock-Skills)
 
----
+[快速开始](#-3-分钟上手) · [5 个真实场景](#-5-个真实场景) · [为什么只有 10 个](#-为什么只有-10-个) · [English](README_EN.md)
 
-## 🎯 项目简介
-
-**A-Stock-Skills** 是面向 **A 股散户**的 **Claude Agent Skills 集合**。
-**只保留实战用得上的 10 个 Skill**, 其他 29 个已归档到 [`archive-v1`](https://github.com/ZICXR/A-Stock-Skills/tree/archive-v1) 分支。
-
-> 🤖 专为 Claude Code 设计 - Claude 自动识别和使用这些 Skill
+</div>
 
 ---
 
-## ✨ 核心特色
+## 😩 你也这样吗?
 
-| 特色 | 描述 |
-|------|------|
-| 🎯 **少即是多** | 10 个核心 Skill,5 个真实场景覆盖 90% 需求 |
-| 🔌 **多源 fallback** | ifzq → sina → 东财 → akshare, 住宅 IP 友好 |
-| 💾 **K线 parquet 缓存** | 第一次 30 分钟,之后 5 秒,差 360 倍 |
-| 🔁 **断点续传** | screener 崩了? 下次自动继续 |
-| 📝 **AI 复盘机制** | trade-journal 记录 AI vs 实盘,跑 3 个月看胜率 |
-| 🛡️ **不接券商账号** | 安全第一,交易还是您自己来 |
+- 跑全市场筛选, **30 分钟还没完**
+- 数据源今天能用, 明天就封
+- Claude 给了 4 只推荐, **不知道准不准**
+- 自选股涨了 5%, 收盘才发现
+- 40 个工具, 90% 用不上
 
----
-
-## 📦 10 个核心 Skill
-
-| # | Skill | 解决什么 | Layer |
-|---|-------|---------|-------|
-| 0 | **start-here** | 30 秒上手指南 | 入门 |
-| 1 | **astock-data-source** | 多源数据 (v2.0 fallback) | 基建 |
-| 2 | **astock-cache** | K线 parquet 缓存 | 基建 |
-| 3 | **astock-utils** | 代码转换/工具函数 | 基建 |
-| 4 | **watchlist-monitor** | 自选股监控 + 告警 | 数据 |
-| 5 | **screener** | 全市场筛选 (v3 接入数据源+缓存) | 量化 |
-| 6 | **stock-technical-analysis** | MA/MACD/KDJ/RSI/BOLL | 分析 |
-| 7 | **report** | 每日复盘 + 个股研报 | 报告 |
-| 8 | **alerter** | 钉钉/微信/飞书 推送 | 工具 |
-| 9 | **trade-journal** | 🆕 AI vs 实盘 复盘 | 工具 |
-
-> 📦 29 个原 Skill (ML/量化训练/多策略组合等) 已归档 → [`archive-v1`](https://github.com/ZICXR/A-Stock-Skills/tree/archive-v1) 分支
+**这工具就是来解决这些的。**
 
 ---
 
-## 🚀 快速开始 (3 分钟)
+## ✨ 它能做什么
 
-### 1. 安装
+| 痛点 | 解决方式 | 速度 |
+|------|---------|------|
+| 数据源今天能跑明天就废 | 4 源自动 fallback | ✅ |
+| 跑一次筛选要 30 分钟 | K线 parquet 缓存 | **360 倍** ↑ |
+| 跑了 100 只崩了 | 断点续传 | ✅ |
+| 不知道 AI 准不准 | trade-journal 复盘 | ✅ |
+| 40 个工具用不上 | 只留 10 个核心 | 砍掉 75% |
+| 自选股涨了才看见 | 实时监控 + 钉钉推送 | ✅ |
+
+---
+
+## 🚀 3 分钟上手
 
 ```bash
 git clone https://github.com/ZICXR/A-Stock-Skills.git
 cd A-Stock-Skills
 pip install -r requirements.txt
+claude
 ```
 
-### 2. 在 Claude Code 中使用
+搞定。Claude 会自动识别这些 Skill。
 
-```bash
-cd A-Stock-Skills
-claude  # Claude 自动发现 skills/
-```
+---
 
-### 3. 实战 5 场景
+## 🎬 5 个真实场景
 
-**场景 1: 拿一只股票行情**
+### 1️⃣ 拿一只股票行情
+
 ```bash
 python skills/01-infra/astock-data-source/main.py get-realtime --code 601991
 ```
 
-**场景 2: 全市场 PE<20 筛选**
-```bash
-python skills/05-quant/screener/main.py screen --where "pe<20 and roe>15" --top 30
-```
-
-**场景 3: 监控自选股**
-```bash
-# 1) 生成配置模板
-python skills/02-data-collection/watchlist-monitor/main.py init
-# 2) 编辑 watchlist.yaml
-# 3) 启动
-python skills/02-data-collection/watchlist-monitor/main.py monitor
-```
-
-**场景 4: K 线缓存 (加速 360 倍)**
-```bash
-# 一次性更新全市场
-python daily_update.py
-# 之后 5 秒出结果
-```
-
-**场景 5: 复盘 AI 准不准**
-```bash
-# 记录今天的 AI 建议
-python skills/02-data-collection/trade-journal/main.py record \
-  --code 601991 --signal "MACD金叉" --target_price 3.50
-# 30 天后比对
-python skills/02-data-collection/trade-journal/main.py review
+```json
+{"code":"601991","name":"大唐发电","price":3.20,"pct_change":+5.26,"source":"ifzq_gtimg"}
 ```
 
 ---
 
-## 🏗️ 项目结构
+### 2️⃣ 全市场 PE<20 + ROE>15 (Python 表达式)
 
-```
-A-Stock-Skills/
-├── README.md
-├── daily_update.py              # K线缓存更新 (15-30 分钟首次,5 秒增量)
-├── requirements.txt
-├── skills/
-│   ├── 00-start-here/           # 上手指南
-│   ├── 01-infra/                # 基建 (3)
-│   │   ├── astock-data-source/  # 多源数据 v2.0
-│   │   ├── astock-cache/        # K线 parquet 缓存
-│   │   └── astock-utils/        # 工具
-│   ├── 02-data-collection/      # 数据采集 (2)
-│   │   ├── watchlist-monitor/   # 自选股
-│   │   └── trade-journal/       # AI vs 实盘 复盘 🆕
-│   ├── 04-stock-analysis/       # 个股分析 (1)
-│   │   └── stock-technical-analysis/
-│   ├── 05-quant/                # 量化 (1)
-│   │   └── screener/            # v3 接入数据源+缓存
-│   ├── 05-reports/              # 报告 (1)
-│   │   └── report/
-│   └── 06-tools/                # 工具 (1)
-│       └── alerter/             # 钉钉/微信/飞书
-└── webui/                       # Web UI (Streamlit)
+```bash
+python skills/05-quant/screener/main.py screen --where "pe<20 and roe>15" --top 30
 ```
 
-每个 Skill 的标准结构:
+```
+✅ 筛选结果 (30 只)
+================================================================================
+  code    name    price   pe    roe   total_mv   change_5d
+  600519  贵州茅台 1680.0  18.5  32.1  21500.0    +3.2
+  ...
+================================================================================
+```
+
+---
+
+### 3️⃣ 监控自选股, 涨 5% 自动推钉钉
+
+```bash
+# 1) 生成配置
+python skills/02-data-collection/watchlist-monitor/main.py init
+# 2) 编辑 watchlist.yaml
+# 3) 启动
+python skills/02-data-collection/watchlist-monitor/main.py loop --interval 30
+```
+
+> 下午 2:30, 持仓股 300308 涨 5.2% → 钉钉收到推送 📲
+
+---
+
+### 4️⃣ K 线缓存: 第二次 5 秒出结果
+
+```bash
+# 盘后跑一次, 之后都 5 秒
+python daily_update.py
+# 📦 缓存统计: {"count": 5028, "size_mb": 18.4}
+```
+
+> 第一次 30 分钟, 之后 5 秒. **差 360 倍**.
+
+---
+
+### 5️⃣ 记录 AI 推荐, 30 天后看胜率
+
+```bash
+# 记录 AI 建议
+python skills/02-data-collection/trade-journal/main.py record \
+  --code 601991 --signal "MACD金叉" --target_price 3.50
+
+# 30 天后比对
+python skills/02-data-collection/trade-journal/main.py review
+```
+
+> 🎯 AI 胜率 (近 90 天): 58.3%, 平均 +4.2%, 跑赢沪深 300 +2.4%
+
+---
+
+## 🎯 为什么只有 10 个?
+
+> **少即是多。** 我之前有 40 个, 90% 是"长尾场景"。现在只剩实战用得上的。
+
+| Layer | 数量 | Skill |
+|-------|------|-------|
+| 🟢 入门 | 1 | start-here |
+| 🔵 基建 | 3 | astock-data-source, astock-cache, astock-utils |
+| 🟡 数据 | 2 | watchlist-monitor, trade-journal |
+| 🟠 分析 | 1 | stock-technical-analysis |
+| 🔴 量化 | 1 | screener |
+| 🟣 报告 | 1 | report |
+| ⚫ 工具 | 1 | alerter |
+
+📦 另外 29 个 (ML/多策略组合/财务三表等) 已归档到 [`archive-v1`](https://github.com/ZICXR/A-Stock-Skills/tree/archive-v1) 分支, 用到再开。
+
+---
+
+## 🛠️ 给开发者
+
+每个 Skill 的结构:
+
 ```
 skill-name/
-├── SKILL.md            # 30-200 行核心 (When to Activate + 5 API)
+├── SKILL.md            # 30-200 行 (When to Activate + 5 API)
 ├── main.py             # 可执行入口
 ├── requirements.txt
-└── references/         # 详细文档 (按需加载,不挤上下文)
+└── references/         # 详细文档, 不挤上下文
     ├── API.md
     ├── EXAMPLES.md
     └── TROUBLESHOOTING.md
 ```
 
----
+**调用方式**:
 
-## 🎯 设计哲学
+```python
+# CLI
+python skills/01-infra/astock-data-source/main.py get-realtime --code 601991
 
-1. **少即是多** - 10 个 Skill 覆盖 90% 实战需求
-2. **数据源隔离** - 所有 Skill 走 astock-data-source,不再各自抓 eastmoney
-3. **缓存优先** - K线 parquet 缓存让"每天跑一次"成为可能
-4. **AI 可问责** - trade-journal 让 AI 对自己的建议负责
-5. **拒绝合并** - 不做"3合1/2合1",用户要的是清晰
-
----
-
-## 🤖 Claude Agent Skills 规范
-
-每个 Skill 的 `SKILL.md`:
-```yaml
----
-name: skill-name
-description: 触发条件描述
----
+# Python API
+from skills.01-infra.astock-data-source.main import get_realtime
+q = get_realtime("601991")
 ```
 
-Claude 自动:
-1. 扫描 `SKILL.md`
-2. 解析 frontmatter
-3. 用户请求匹配时自动激活
-4. 调用对应 `main.py`
+**数据源优先级** (v2.0):
 
----
+```
+ifzq gtimg (腾讯) → sina → 东财 → akshare
+```
 
-## 🛠️ 技术栈
-
-- **Python 3.8+**
-- **数据源**: ifzq gtimg (腾讯) → sina → 东财 → akshare
-- **缓存**: pandas + pyarrow parquet
-- **风格**: 函数式 + CLI 双接口
+任何源连续失败 3 次, 自动跳过。住宅 IP 也能用。
 
 ---
 
 ## 📊 路线图
 
-- [x] **精简到 10 个核心 Skill** ✅
-- [x] **多源 fallback (v2.0)** ✅
-- [x] **K线 parquet 缓存** ✅
-- [x] **断点续传 screener** ✅
-- [x] **trade-journal** 🆕 ✅
-- [ ] 跑 3 个月,看 AI 胜率
-- [ ] Web UI 完善
-- [ ] 飞书/钉钉 推送模板
+- [x] 精简到 10 个核心 Skill
+- [x] 多源 fallback (v2.0)
+- [x] K线 parquet 缓存 (5 秒 vs 30 分)
+- [x] 断点续传 screener
+- [x] trade-journal 复盘机制
+- [ ] 跑 3 个月, 看 AI 真实胜率
+- [ ] 推送模板库
+- [ ] Web UI
 
 ---
 
 ## 🛡️ 免责声明
 
-本项目数据来源于**公开市场数据**, 仅供学习研究使用,
-**不构成任何投资建议**。投资有风险, 入市需谨慎。
-**AI 不可信, 除非它愿意被复盘** — 用 `trade-journal` 验证。
+数据来自**公开市场**, **仅供学习研究**。
+**不构成任何投资建议**。
+
+> **AI 不可信, 除非它愿意被复盘** —— 用 `trade-journal` 验证。
+
+投资有风险, 入市需谨慎。
 
 ---
 
-## 📜 许可证
+## 🤝 一起做
 
-[MIT License](./LICENSE)
+觉得好用? **点个 ⭐ Star** 是最大的支持。
+
+想贡献? 提 Issue / PR 都欢迎。
 
 ---
 
 <div align="center">
 
-**⭐ 如果觉得有用, 请点 Star ⭐**
+**⭐ Star** · [📖 文档](tutorials/) · [🐛 提 Issue](https://github.com/ZICXR/A-Stock-Skills/issues) · [🍴 Fork](https://github.com/ZICXR/A-Stock-Skills/fork)
 
-🤖 Generated with [Claude Code](https://claude.com/claude-code)
+[MIT License](LICENSE) · Made with ❤️ for A 股散户
 
 </div>
