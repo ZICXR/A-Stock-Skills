@@ -38,42 +38,42 @@
 
 ### 🏗️ Layer 1: 基础设施层 (3)
 
-| Skill | 说明 |
-|-------|------|
-| [astock-data-source](./skills/01-infra/astock-data-source/) | **v2.0** 多源数据源 (ifzq→sina→东财→akshare) + 自动 fallback |
-| [astock-utils](./skills/01-infra/astock-utils/) | 通用工具: 代码转换/交易日历/技术指标/格式化 |
-| [astock-cache](./skills/01-infra/astock-cache/) | **K线 parquet 缓存**,首次 30 分钟,之后 5 秒 |
+| Skill | 适用场景 | 怎么用 |
+|-------|---------|--------|
+| [astock-data-source](./skills/01-infra/astock-data-source/) | 想拿某只股票/某只 ETF 的实时价格或 K 线 | Claude 里直接说"601991 现在多少钱",它自动调用 |
+| [astock-utils](./skills/01-infra/astock-utils/) | 需要转换股票代码格式 (601991 ↔ sh601991)、算交易日、格式化输出 | 其他 Skill 内部调用,你一般不用直接用 |
+| [astock-cache](./skills/01-infra/astock-cache/) | 跑全市场筛选每次都要等半小时,想让第二次只等 5 秒 | 跑一次 `python daily_update.py`,之后跑筛选就快了 |
 
 ### 📡 Layer 2: 数据采集层 (2)
 
-| Skill | 说明 |
-|-------|------|
-| [watchlist-monitor](./skills/02-data-collection/watchlist-monitor/) | 自选股监控 (配置/CLI) + 涨跌幅告警 |
-| **🆕 [trade-journal](./skills/02-data-collection/trade-journal/)** | **AI 推荐 vs 实盘 复盘** (30 天后看胜率) |
+| Skill | 适用场景 | 怎么用 |
+|-------|---------|--------|
+| [watchlist-monitor](./skills/02-data-collection/watchlist-monitor/) | 持仓股想实时监控,涨 5% 自动提醒,免得收盘才发现 | 生成 `watchlist.yaml` 配股票池,`loop --interval 30` 启动 |
+| **🆕 [trade-journal](./skills/02-data-collection/trade-journal/)** | 想记录 AI 给的推荐,30 天后看 AI 准不准 | 每次 AI 推荐用 `record` 记录,30 天后用 `review` 看胜率 |
 
 ### 🎯 Layer 4: 个股分析层 (1)
 
-| Skill | 说明 |
-|-------|------|
-| [stock-technical-analysis](./skills/04-stock-analysis/stock-technical-analysis/) | K线形态 + MA/MACD/KDJ/RSI/BOLL 趋势 + 买卖信号 |
+| Skill | 适用场景 | 怎么用 |
+|-------|---------|--------|
+| [stock-technical-analysis](./skills/04-stock-analysis/stock-technical-analysis/) | 想看 MACD 金叉、KDJ 死叉、是否站上 20 日均线 | Claude 里说"601991 现在 MACD 是不是金叉" |
 
 ### 📊 Layer 5: 量化策略层 (1)
 
-| Skill | 说明 |
-|-------|------|
-| [screener](./skills/05-quant/screener/) | **v3** 全市场筛选 (Python 表达式) + 接入 astock-data-source + 断点续传 |
+| Skill | 适用场景 | 怎么用 |
+|-------|---------|--------|
+| [screener](./skills/05-quant/screener/) | 想从全市场 5000 只里筛出"PE<20、ROE>15、站上 20 日均线"的股票 | `screen --where "pe<20 and roe>15"` |
 
 ### 📝 Layer 6: 报告层 (1)
 
-| Skill | 说明 |
-|-------|------|
-| [report](./skills/05-reports/report/) | 每日复盘 + 个股深度研报 |
+| Skill | 适用场景 | 怎么用 |
+|-------|---------|--------|
+| [report](./skills/05-reports/report/) | 想让 AI 帮你写一份今日复盘或单股深度研报 | `report daily` 或 `report stock 601991` |
 
 ### 🛠️ Layer 8: 工具层 (1)
 
-| Skill | 说明 |
-|-------|------|
-| [alerter](./skills/06-tools/alerter/) | 告警推送 (钉钉/微信/飞书/Slack/Telegram/Server酱) |
+| Skill | 适用场景 | 怎么用 |
+|-------|---------|--------|
+| [alerter](./skills/06-tools/alerter/) | 监控告警要推到钉钉/微信/飞书,不打开电脑也能收到 | 配置 webhook,其他 Skill 触发时自动推送 |
 
 ### 🌐 Web UI (新增)
 
